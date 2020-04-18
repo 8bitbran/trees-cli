@@ -6,15 +6,14 @@ class TreesCLI::APIManager
 
     def self.get_strains
         response = HTTParty.get("#{BASE_URL}search/all")
-        TreesCLI::Strains.create_from_hash(response)
+        TreesCLI::Strains.create_from_api(response)
     end 
 
     def self.get_descriptions
-        id = 1
-        until id > TreesCLI::Strains.all.length
-            response = HTTParty.get("#{BASE_URL}data/desc/#{id}"
-            TreesCLI::Descriptions.create_from_hash(response)
-            id += 1
+        TreesCLI::Strains.each do |strain|
+            id = strain.id
+            response = HTTParty.get("#{BASE_URL}data/desc/#{strain.id}"
+            TreeCLI::Descriptions.create_from_api(id, response)
         end
     end
 
