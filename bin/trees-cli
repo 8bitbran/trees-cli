@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/trees_cli'
+
+TreesCLI::StrainsController.new.call
